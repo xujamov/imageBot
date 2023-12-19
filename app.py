@@ -1,4 +1,5 @@
 import logging
+import os
 import uuid
 
 from telegram import ReplyKeyboardRemove, Update
@@ -79,9 +80,10 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     await photo_file.download_to_drive(image_name)
     logger.info("Photo of %s: %s", user.first_name, image_name)
     answer = photo_answer(image_name)
-    await update.message.reply_text(
-        answer
-    )
+    await update.message.reply_text(answer)
+
+    # Remove the image file after processing
+    remove_image(image_name)
 
     return PHOTO
 
@@ -105,6 +107,16 @@ def photo_answer(image):
 
     response = model.generate_content(prompt_parts)
     return response.text
+
+def remove_image(image_name):
+    # Validate that an image is present
+    img_path = Path(image_name)
+    if not img_path.exists():
+        raise FileNotFoundError(f"Could not find image: {img_path}")
+
+    # Remove the image file
+    os.remove(img_path)
+    logger.info("Removed image: %s", img_path)
 
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Cancels and ends the conversation."""
