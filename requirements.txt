@@ -10,4 +10,4 @@ httpx ~= 0.25.2
 python-telegram-bot[all]
 google-generativeai
 gunicorn
-python-dotenv
+python-dotenv==1.0.0
