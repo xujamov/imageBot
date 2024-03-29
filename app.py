@@ -86,7 +86,6 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     remove_image(image_name)
     return PHOTO
 
-
 def photo_answer(image):
     # Validate that an image is present
     if not (img := Path(image)).exists():
