@@ -82,6 +82,7 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     answer = photo_answer(image_name)
     await update.message.reply_text(answer)
 
+
     # Remove the image file after processing
     remove_image(image_name)
     return PHOTO
