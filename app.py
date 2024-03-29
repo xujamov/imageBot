@@ -93,6 +93,7 @@ def photo_answer(image):
         raise FileNotFoundError(f"Could not find image: {img}")
 
 
+
     image_parts = [
         {
             "mime_type": "image/jpeg",
