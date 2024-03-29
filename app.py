@@ -92,6 +92,7 @@ def photo_answer(image):
     if not (img := Path(image)).exists():
         raise FileNotFoundError(f"Could not find image: {img}")
 
+
     image_parts = [
         {
             "mime_type": "image/jpeg",
